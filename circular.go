@@ -4,7 +4,7 @@
 
 package circular
 
-type Circular_t struct {
+type List_t struct {
 	root []interface{}
 	head int
 	tail int
@@ -12,14 +12,14 @@ type Circular_t struct {
 	written int
 }
 
-func New(limit int) (self * Circular_t) {
-	self = &Circular_t{}
+func New(limit int) (self * List_t) {
+	self = &List_t{}
 	self.root = make([]interface{}, limit)
 	self.limit = limit
 	return
 }
 
-func (self * Circular_t) PushBack(value interface{}) bool {
+func (self * List_t) PushBack(value interface{}) bool {
 	if self.written == self.limit {
 		return false
 	}
@@ -32,7 +32,7 @@ func (self * Circular_t) PushBack(value interface{}) bool {
 	return true
 }
 
-func (self * Circular_t) PopBack() (interface{}, bool) {
+func (self * List_t) PopBack() (interface{}, bool) {
 	if self.written == 0 {
 		return nil, false
 	}
@@ -45,7 +45,7 @@ func (self * Circular_t) PopBack() (interface{}, bool) {
 	return self.root[self.head], true
 }
 
-func (self * Circular_t) PushFront(value interface{}) bool {
+func (self * List_t) PushFront(value interface{}) bool {
 	if self.written == self.limit {
 		return false
 	}
@@ -59,7 +59,7 @@ func (self * Circular_t) PushFront(value interface{}) bool {
 	return true
 }
 
-func (self * Circular_t) PopFront() (value interface{}, ok bool) {
+func (self * List_t) PopFront() (value interface{}, ok bool) {
 	if self.written == 0 {
 		return
 	}
@@ -73,6 +73,6 @@ func (self * Circular_t) PopFront() (value interface{}, ok bool) {
 	return
 }
 
-func (self * Circular_t) Size() int {
+func (self * List_t) Size() int {
 	return self.written
 }
