@@ -32,17 +32,18 @@ func (self * List_t) PushBack(value interface{}) bool {
 	return true
 }
 
-func (self * List_t) PopBack() (interface{}, bool) {
+func (self * List_t) PopFront() (value interface{}, ok bool) {
 	if self.written == 0 {
-		return nil, false
+		return
 	}
-	if self.head == 0 {
-		self.head = self.limit - 1
-	} else {
-		self.head--
+	if self.tail == self.limit {
+		self.tail = 0
 	}
+	value = self.root[self.tail]
+	self.tail++
 	self.written--
-	return self.root[self.head], true
+	ok = true
+	return
 }
 
 func (self * List_t) PushFront(value interface{}) bool {
@@ -59,22 +60,17 @@ func (self * List_t) PushFront(value interface{}) bool {
 	return true
 }
 
-func (self * List_t) PopFront() (value interface{}, ok bool) {
+func (self * List_t) PopBack() (interface{}, bool) {
 	if self.written == 0 {
-		return
+		return nil, false
 	}
-	if self.tail == self.limit {
-		self.tail = 0
+	if self.head == 0 {
+		self.head = self.limit - 1
+	} else {
+		self.head--
 	}
-	value = self.root[self.tail]
-	self.tail++
 	self.written--
-	ok = true
-	return
-}
-
-func (self * List_t) Size() int {
-	return self.written
+	return self.root[self.head], true
 }
 
 func (self * List_t) RangeFront(f func(interface{}) bool) {
@@ -102,4 +98,8 @@ func (self * List_t) RangeBack(f func(interface{}) bool) {
 			return
 		}
 	}
+}
+
+func (self * List_t) Size() int {
+	return self.written
 }
