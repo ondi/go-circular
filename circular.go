@@ -76,3 +76,30 @@ func (self * List_t) PopFront() (value interface{}, ok bool) {
 func (self * List_t) Size() int {
 	return self.written
 }
+
+func (self * List_t) RangeFront(f func(interface{}) bool) {
+	cur := self.tail
+	for i := 0; i < self.written; i++ {
+		if cur == self.limit {
+			cur = 0
+		}
+		if f(self.root[cur]) == false {
+			return
+		}
+		cur++
+	}
+}
+
+func (self * List_t) RangeBack(f func(interface{}) bool) {
+	cur := self.head
+	for i := 0; i < self.written; i++ {
+		if cur == 0 {
+			cur = self.limit - 1
+		} else {
+			cur--
+		}
+		if f(self.root[cur]) == false {
+			return
+		}
+	}
+}
