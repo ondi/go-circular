@@ -1,318 +1,299 @@
 package circular
 
-import "fmt"
-import "testing"
+import (
+	"testing"
 
-func ExampleCircular1() {
+	"gotest.tools/assert"
+)
+
+func TestCircular1(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushBack(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushBack(2)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushBack(3)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == false)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 2 && ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 1 && ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-true
-false
-2 true
-1 true
-<nil> false
-*/
+	assert.Assert(t, value == nil && ok == false)
 }
 
-func ExampleCircular2() {
+func TestCircular2(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushFront(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushFront(2)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushFront(3)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == false)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 2 && ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 1 && ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-true
-false
-2 true
-1 true
-<nil> false
-*/
+	assert.Assert(t, value == nil && ok == false)
 }
 
-func ExampleCircular3() {
+func TestCircular3(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushBack(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushBack(2)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushBack(3)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == false)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 1 && ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 2 && ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-true
-false
-1 true
-2 true
-<nil> false
-*/
+	assert.Assert(t, value == nil && ok == false)
 }
 
-func ExampleCircular4() {
+func TestCircular4(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushFront(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushFront(2)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushFront(3)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == false)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 1 && ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 2 && ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-true
-false
-1 true
-2 true
-<nil> false
-*/
+	assert.Assert(t, value == nil && ok == false)
 }
 
-func ExampleCircular5() {
+func TestCircular5(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushBack(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushFront(2)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushBack(3)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == false)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 1 && ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 2 && ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-true
-false
-1 true
-2 true
-<nil> false
-*/
+	assert.Assert(t, value == nil && ok == false)
 }
 
-func ExampleCircular6() {
+func TestCircular6(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushFront(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushBack(2)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	ok = c.PushFront(3)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == false)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 1 && ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-	
+	assert.Assert(t, value == 2 && ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-true
-false
-1 true
-2 true
-<nil> false
-*/
+	assert.Assert(t, value == nil && ok == false)
 }
 
-func ExampleCircular7() {
+func TestCircular7(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushFront(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	value, ok = c.PopBack()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-1 true
-*/
+	assert.Assert(t, value == 1 && ok == true)
 }
 
-func ExampleCircular8() {
+func TestCircular8(t *testing.T) {
 	var value interface{}
 	var ok bool
-	
+
 	c := New(2)
-	
+
 	ok = c.PushBack(1)
-	fmt.Printf("%v\n", ok)
-	
+	assert.Assert(t, ok == true)
+
 	value, ok = c.PopFront()
-	fmt.Printf("%v %v\n", value, ok)
-/* Output:
-true
-1 true
-*/
+	assert.Assert(t, value == 1 && ok == true)
 }
 
-func ExampleCircular9() {
+func TestCircular9(t *testing.T) {
 	c := New(3)
-	
+
 	c.PushBack(1)
 	c.PushBack(2)
 	c.PushBack(3)
-	c.RangeFront(func(v interface{}) bool {
-		fmt.Printf("%v\n", v)
-		return true
-	})
-	c.RangeBack(func(v interface{}) bool {
-		fmt.Printf("%v\n", v)
-		return true
-	})
-/* Output:
-1
-2
-3
-3
-2
-1
-*/
+	i := 1
+	c.RangeFront(
+		func(v interface{}) bool {
+			assert.Assert(t, v == i)
+			i++
+			return true
+		},
+	)
+	i = 3
+	c.RangeBack(
+		func(v interface{}) bool {
+			assert.Assert(t, v == i)
+			i--
+			return true
+		},
+	)
 }
 
-func ExampleCircular10() {
+func TestCircular10(t *testing.T) {
 	c := New(3)
-	
+
 	c.PushFront(3)
 	c.PushFront(2)
 	c.PushFront(1)
-	c.RangeFront(func(v interface{}) bool {
-		fmt.Printf("%v\n", v)
-		return true
-	})
-	c.RangeBack(func(v interface{}) bool {
-		fmt.Printf("%v\n", v)
-		return true
-	})
-/* Output:
-1
-2
-3
-3
-2
-1
-*/
+	i := 1
+	c.RangeFront(
+		func(v interface{}) bool {
+			assert.Assert(t, v == i)
+			i++
+			return true
+		},
+	)
+	i = 3
+	c.RangeBack(
+		func(v interface{}) bool {
+			assert.Assert(t, v == i)
+			i--
+			return true
+		},
+	)
 }
 
-func ExampleCircular11() {
+func TestCircular11(t *testing.T) {
 	c := New(3)
-	
+
 	c.PushBack(4)
 	c.PushFront(2)
 	c.PopBack()
 	c.PushFront(1)
 	c.PushBack(3)
-	c.RangeFront(func(v interface{}) bool {
-		fmt.Printf("%v\n", v)
-		return true
-	})
-	c.RangeBack(func(v interface{}) bool {
-		fmt.Printf("%v\n", v)
-		return true
-	})
-/* Output:
-1
-2
-3
-3
-2
-1
-*/
+	i := 1
+	c.RangeFront(
+		func(v interface{}) bool {
+			assert.Assert(t, v == i)
+			i++
+			return true
+		},
+	)
+	i = 3
+	c.RangeBack(
+		func(v interface{}) bool {
+			assert.Assert(t, v == i)
+			i--
+			return true
+		},
+	)
 }
 
-func BenchmarkCircular1(b * testing.B) {
+func TestCircular12(t *testing.T) {
+	var value interface{}
+	var ok bool
+
+	c := New(2)
+
+	ok = c.PushBack(1)
+	assert.Assert(t, ok == true)
+
+	value, ok = c.Back()
+	assert.Assert(t, value == 1 && ok == true)
+
+	value, ok = c.Front()
+	assert.Assert(t, value == 1 && ok == true)
+
+	ok = c.PushBack(2)
+	assert.Assert(t, ok == true)
+
+	value, ok = c.Back()
+	assert.Assert(t, value == 2 && ok == true)
+
+	value, ok = c.Front()
+	assert.Assert(t, value == 1 && ok == true)
+
+	ok = c.PushBack(3)
+	assert.Assert(t, ok == false)
+
+	value, ok = c.Back()
+	assert.Assert(t, value == 2 && ok == true)
+
+	value, ok = c.Front()
+	assert.Assert(t, value == 1 && ok == true)
+}
+
+func BenchmarkCircular1(b *testing.B) {
 	b.ReportAllocs()
 	c := New(b.N)
-	for i := 0; i < b.N; i++{
+	for i := 0; i < b.N; i++ {
 		c.PushBack("lalala")
 	}
 }
