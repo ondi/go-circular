@@ -4,22 +4,22 @@
 
 package circular
 
-type List_t struct {
-	root    []interface{}
+type List_t[Value_t any] struct {
+	root    []Value_t
 	front   int
 	back    int
 	written int
 }
 
-func New(limit int) (self *List_t) {
-	self = &List_t{}
-	self.root = make([]interface{}, limit)
+func New[Value_t any](limit int) (self *List_t[Value_t]) {
+	self = &List_t[Value_t]{}
+	self.root = make([]Value_t, limit)
 	return
 }
 
-func (self *List_t) Back() (interface{}, bool) {
+func (self *List_t[Value_t]) Back() (res Value_t, ok bool) {
 	if self.written == 0 {
-		return nil, false
+		return
 	}
 	if self.back == 0 {
 		return self.root[len(self.root)-1], true
@@ -27,9 +27,9 @@ func (self *List_t) Back() (interface{}, bool) {
 	return self.root[self.back-1], true
 }
 
-func (self *List_t) Front() (interface{}, bool) {
+func (self *List_t[Value_t]) Front() (res Value_t, ok bool) {
 	if self.written == 0 {
-		return nil, false
+		return
 	}
 	if self.front == len(self.root) {
 		return self.root[0], true
@@ -37,7 +37,7 @@ func (self *List_t) Front() (interface{}, bool) {
 	return self.root[self.front], true
 }
 
-func (self *List_t) PushBack(value interface{}) bool {
+func (self *List_t[Value_t]) PushBack(value Value_t) bool {
 	if self.written == len(self.root) {
 		return false
 	}
@@ -50,7 +50,7 @@ func (self *List_t) PushBack(value interface{}) bool {
 	return true
 }
 
-func (self *List_t) PopFront() (value interface{}, ok bool) {
+func (self *List_t[Value_t]) PopFront() (value Value_t, ok bool) {
 	if self.written == 0 {
 		return
 	}
@@ -64,7 +64,7 @@ func (self *List_t) PopFront() (value interface{}, ok bool) {
 	return
 }
 
-func (self *List_t) PushFront(value interface{}) bool {
+func (self *List_t[Value_t]) PushFront(value Value_t) bool {
 	if self.written == len(self.root) {
 		return false
 	}
@@ -78,9 +78,9 @@ func (self *List_t) PushFront(value interface{}) bool {
 	return true
 }
 
-func (self *List_t) PopBack() (interface{}, bool) {
+func (self *List_t[Value_t]) PopBack() (res Value_t, ok bool) {
 	if self.written == 0 {
-		return nil, false
+		return
 	}
 	if self.back == 0 {
 		self.back = len(self.root) - 1
@@ -91,7 +91,7 @@ func (self *List_t) PopBack() (interface{}, bool) {
 	return self.root[self.back], true
 }
 
-func (self *List_t) RangeFront(f func(interface{}) bool) {
+func (self *List_t[Value_t]) RangeFront(f func(Value_t) bool) {
 	cur := self.front
 	for i := 0; i < self.written; i++ {
 		if cur == len(self.root) {
@@ -104,7 +104,7 @@ func (self *List_t) RangeFront(f func(interface{}) bool) {
 	}
 }
 
-func (self *List_t) RangeBack(f func(interface{}) bool) {
+func (self *List_t[Value_t]) RangeBack(f func(Value_t) bool) {
 	cur := self.back
 	for i := 0; i < self.written; i++ {
 		if cur == 0 {
@@ -118,6 +118,6 @@ func (self *List_t) RangeBack(f func(interface{}) bool) {
 	}
 }
 
-func (self *List_t) Size() int {
+func (self *List_t[Value_t]) Size() int {
 	return self.written
 }
