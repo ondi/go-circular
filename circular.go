@@ -12,9 +12,16 @@ type List_t[Value_t any] struct {
 }
 
 func New[Value_t any](limit int) (self *List_t[Value_t]) {
-	self = &List_t[Value_t]{}
-	self.root = make([]Value_t, limit)
+	self = &List_t[Value_t]{
+		root: make([]Value_t, limit),
+	}
 	return
+}
+
+func (self *List_t[Value_t]) Reset() {
+	self.front = 0
+	self.back = 0
+	self.written = 0
 }
 
 func (self *List_t[Value_t]) Back() (res Value_t, ok bool) {
